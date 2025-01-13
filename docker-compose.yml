@@ -1,0 +1,36 @@
+services:
+  sql-server:
+    image: sql-server:2017
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: "SQLServer2017"
+      MSSQL_PID: "Developer"
+    ports:
+      - 1433:1433
+    networks:
+      - services-network
+    env_file:
+      - 'variables.env'
+    healthcheck:
+      # TODO: use env variables instead hardcoded values
+      test: ["CMD-SHELL", "/opt/mssql-tools/bin/sqlcmd -S localhost,1433 -U sa -P SQLServer2017 -Q \"SELECT 1\" || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    post_start:
+      # TODO: use apply_sql_changes instead /usr/share/instnwnd.sql
+      # TODO2: ensure there is no race with health check
+      - command: |
+          /opt/mssql-tools/bin/sqlcmd -S "localhost" -U "sa" -P "SQLServer2017" -i /usr/share/instnwnd.sql
+  integration-tests:
+    image: integration-tests
+    networks:
+      - services-network
+    depends_on:
+      sql-server:
+        condition: service_healthy
+    env_file:
+      - 'variables.env'
+
+networks:
+  services-network: 

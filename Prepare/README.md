@@ -1,0 +1,1 @@
+This folder consists of file to create initial docker image with SQL data
