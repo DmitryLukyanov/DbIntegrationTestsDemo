@@ -6,7 +6,7 @@ docker rm -f "${CONTAINER_NAME}" \
 
 docker build -t integration-tests -f ./../DbIntegrationTestsDemo/Dockerfile ./../DbIntegrationTestsDemo/
 
-# NOTE: Use the below for debug
+# NOTE: Use the below for debugging
 # Case 1: run and mount local integration-tests folder to the container opt/integration-tests
 # docker run \
 #   -d \

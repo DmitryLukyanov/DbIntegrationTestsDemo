@@ -17,11 +17,10 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+    # to allow post_start, docker compose must be higher than 2.3
     post_start:
-      # TODO: use apply_sql_changes instead /usr/share/instnwnd.sql
-      # TODO2: ensure there is no race with health check
-      - command: |
-          /opt/mssql-tools/bin/sqlcmd -S "localhost" -U "sa" -P "SQLServer2017" -i /usr/share/instnwnd.sql
+      - command: /opt/mssql-tools/bin/sqlcmd -S "localhost" -U "sa" -P "SQLServer2017" -i /usr/share/instnwnd.sql
+
   integration-tests:
     image: integration-tests
     networks:

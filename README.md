@@ -1,15 +1,15 @@
 # Goal
-Have isolated environment where we can run tests on database in CI/CD flow independently.
+Have isolated environment where we can run tests on database in CI/CD flow (as well as in any other environment including local) independently.
 
 For that purpose, we will need to maintain the database scripts that can create required databases with required structure from scratch and fill it with appropriate data on each run. Similar too [this](https://raw.githubusercontent.com/Microsoft/sql-server-samples/master/samples/databases/northwind-pubs/instnwnd.sql).
 Such scripts can be easily auto generated in tools like SQL [Management Studio](https://learn.microsoft.com/en-us/sql/ssms/scripting/generate-scripts-sql-server-management-studio?view=sql-server-ver16).
-Ourside responsibility will be to embed updating these scripts during release process.
+Ourside responsibility will be to embed updating these scripts into release process.
 
 The current implementation doesn't publish created images and does it only locally, but image publish is required step normally.
 
 # How to
 
-## Environment (for local development)
+## Environment (for local tests)
 This approach requires a docker container engine. We have few options to get it:
 * Docker Desktop - easiest approach, but requires a license.
 * Configure next docker related steps on Linux / MacOS operating system.
@@ -32,7 +32,7 @@ which will lead to:
 ![VSCode WSL connected](readme-imgs/image.png)
 
 #### Intalling Docker
-Next step is installing docker via the below steps:
+Next step is installing `docker` via the below steps:
     1. `git clone` this repository (or you can use your mounted main filesystem: `/mnt/c/PATH_TO_THIS_PROJECT`).
     2. Open this repository in VS code terminal.
 

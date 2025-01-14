@@ -11,9 +11,7 @@ RUN apt update && apt install -y zsh wget git \
 WORKDIR /root
 COPY . .
 
-ENV CONNECTION_STRING="Temp"
-
-# RUN dotnet restore
+RUN dotnet restore
 
 # run tests on docker run
 ENTRYPOINT ["dotnet", "test"]

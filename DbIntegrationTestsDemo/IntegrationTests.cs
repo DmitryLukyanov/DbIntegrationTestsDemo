@@ -22,7 +22,9 @@ namespace DbIntegrationTestsDemo
         public async Task Ensure_all_tables_are_inserted()
         {
             var allDefaultTables = await ReadDatabase("SELECT * FROM INFORMATION_SCHEMA.TABLES");
-            Assert.Equal(expected: 35, allDefaultTables.Rows.Count);
+
+            const int ExpectedNumberOfTablesAfterAppledQLScripts = 35; // otherwise => 6
+            Assert.Equal(expected: ExpectedNumberOfTablesAfterAppledQLScripts, allDefaultTables.Rows.Count);
         }
 
         private async Task<DataTable> ReadDatabase(string query)
