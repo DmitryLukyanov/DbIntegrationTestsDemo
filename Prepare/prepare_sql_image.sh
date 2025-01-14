@@ -6,7 +6,7 @@ docker rm -f "${CONTAINER_NAME}" \
 
 docker build -t sql-server:2017 . 
 
-# Use the below for debug
+# NOTE: Use the below for debug
 # run and mount local sql-server-data folder to the container /opt/sql-server-data
 # NOTE: the container will running until the SQL server inside is up
 #docker run \
