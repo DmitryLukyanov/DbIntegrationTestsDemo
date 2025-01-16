@@ -21,12 +21,27 @@ services:
     post_start:
       - command: sqlcmd -S "localhost" -U "sa" -P "SQLServer2017" -i /usr/share/instnwnd.sql
 
+  webapp-showcase:
+    image: webapp-showcase
+    networks:
+      - services-network
+    healthcheck:
+      test: ["CMD-SHELL", "curl --fail http://localhost:8080/WeatherForecast || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 3 
+    depends_on:
+      sql-server:
+        condition: service_healthy
+    env_file:
+      - 'variables.env'
+
   integration-tests:
     image: integration-tests
     networks:
       - services-network
     depends_on:
-      sql-server:
+      webapp-showcase:
         condition: service_healthy
     env_file:
       - 'variables.env'
