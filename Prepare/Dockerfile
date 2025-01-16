@@ -3,7 +3,7 @@
 # Tools
 # install zsh and oh-my-zsh
 RUN apt update && apt install -y zsh wget git \
-  && sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh-O -)" \
+  && sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)" \
   && git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions \
   && echo "source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh" >> ~/.zshrc \
   && echo "ZSH_THEME=af-magic" >> ~/.zshrc
@@ -19,7 +19,6 @@ ENV SA_PASSWORD="${SQL_PASSWD}"
 ENV MSSQL_PID="Express"
 
 ENV PATH=$PATH:/opt/mssql-tools/bin
-ENV CONNECTION_STRING_2="Temp2"
 
 WORKDIR "/root"
 

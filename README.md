@@ -1,8 +1,8 @@
 # Goal
-Have isolated environment where we can run tests on database in CI/CD flow (as well as in any other environment including local) independently.
+Have isolated environment where we can run tests on database in CI/CD flow independently (as well as in any other environment including local).
 
 For that purpose, we will need to maintain the database scripts that can create required databases with required structure from scratch and fill it with appropriate data on each run. Similar too [this](https://raw.githubusercontent.com/Microsoft/sql-server-samples/master/samples/databases/northwind-pubs/instnwnd.sql).
-Such scripts can be easily auto generated in tools like SQL [Management Studio](https://learn.microsoft.com/en-us/sql/ssms/scripting/generate-scripts-sql-server-management-studio?view=sql-server-ver16).
+Such scripts can be easily auto generated in tools like [SQL Management Studio](https://learn.microsoft.com/en-us/sql/ssms/scripting/generate-scripts-sql-server-management-studio?view=sql-server-ver16).
 Ourside responsibility will be to embed updating these scripts into release process.
 
 The current implementation doesn't publish created images and does it only locally, but image publish is required step normally.
@@ -27,18 +27,19 @@ Recommended distro for this tutorial is `ubuntu-24.04` (`ubuntu` is also fine):
 During installation, you will be asked to provide your new UNIX [credentails](https://learn.microsoft.com/en-us/windows/wsl/setup/environment#set-up-your-linux-username-and-password).
 
 ### Visual Studio code
-After installing WSL, you can open its terminal from Visual Studio code: https://learn.microsoft.com/en-us/windows/wsl/tutorials/wsl-vscode
+After installing WSL, you can open its terminal from [Visual Studio Code](https://learn.microsoft.com/en-us/windows/wsl/tutorials/wsl-vscode)
 which will lead to:
 ![VSCode WSL connected](readme-imgs/image.png)
 
 #### Intalling Docker
 Next step is installing `docker` via the below steps:
+
     1. `git clone` this repository (or you can use your mounted main filesystem: `/mnt/c/PATH_TO_THIS_PROJECT`).
     2. Open this repository in VS code terminal.
 
 Main steps can be found [here](https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository).
 
-#### Set up Docker's apt repository :
+#### Set up Docker's apt repository:
     3. sudo apt-get update
     4. sudo apt-get install ca-certificates curl
     5. sudo install -m 0755 -d /etc/apt/keyrings
@@ -61,7 +62,6 @@ Main steps can be found [here](https://docs.docker.com/engine/install/ubuntu/#in
 
 ## Run images
 ### Sql server image
-
     cd Prepare
     sudo ./prepare_sql_image.sh
 
@@ -111,18 +111,18 @@ To validate launched compose images, use:
 
     sudo docker compose ps
 
-To look at logs for particular container:
+To look at logs for containers:
 
     docker compose logs 
 
 or for the specific container:
 
-    docker-compose logs --follow container
+    docker-compose logs --follow container_name
 
 
 # FAQ:
 
-* In case of encoding issues for a file use the following command:
+* In case of encoding issues for a script file use the following command:
 
       sudo apt install dos2unix
       dos2unix script_file.sh
