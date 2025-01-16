@@ -28,6 +28,10 @@ jobs:
       working-directory: Prepare
       run: docker build -t sql-server:2017 . 
 
+    - name: Build WebApp image
+      working-directory: WebAppShowcase
+      run: docker build -t webapp-showcase . 
+
     - name: Build the Integration Tests image
       working-directory: DbIntegrationTestsDemo
       run: docker build -t integration-tests .
