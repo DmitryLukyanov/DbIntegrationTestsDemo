@@ -21,15 +21,5 @@ services:
     post_start:
       - command: sqlcmd -S "localhost" -U "sa" -P "SQLServer2017" -i /usr/share/instnwnd.sql
 
-  integration-tests:
-    image: integration-tests
-    networks:
-      - services-network
-    depends_on:
-      sql-server:
-        condition: service_healthy
-    env_file:
-      - 'variables.env'
-
 networks:
   services-network: 
