@@ -6,7 +6,7 @@ COPY . ./ProjectReference
 COPY . ./DbIntegrationTestsDemo
 
 RUN ls -R
-WORKDIR /root/DbIntegrationTestsDemo
+WORKDIR ./DbIntegrationTestsDemo/DbIntegrationTestsDemo
 RUN ls -R
 RUN dotnet restore
 

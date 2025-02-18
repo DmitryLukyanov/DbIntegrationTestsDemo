@@ -34,8 +34,9 @@ jobs:
       run: docker build -t webapp-showcase . 
 
     - name: Build the Integration Tests image
-      working-directory: DbIntegrationTestsDemo
-      run: docker build -t integration-tests .
+      # TODO: choose a better paths
+      working-directory: Prepare
+      run: docker build -t integration-tests -f ./../DbIntegrationTestsDemo/Dockerfile ./../
 
     - name: Containerized tests
       run: docker compose -f docker-compose.yml  up --exit-code-from integration-tests
