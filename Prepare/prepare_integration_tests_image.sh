@@ -4,7 +4,7 @@ docker rm -f "${CONTAINER_NAME}" \
    && echo "Container ${CONTAINER_NAME} was removed" \
    || :
 
-docker build -t integration-tests -f ./../DbIntegrationTestsDemo/Dockerfile ./../DbIntegrationTestsDemo/
+docker build -t integration-tests --no-cache --progress=plain -f ./../DbIntegrationTestsDemo/Dockerfile ./../
 
 # NOTE: Use the below for debugging
 # Case 1: run and mount local integration-tests folder to the container opt/integration-tests
