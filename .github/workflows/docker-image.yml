@@ -9,6 +9,7 @@ on:
 jobs:
 
   Containerized_integration_tests:
+    # latest ubuntu has issues with docker compose: https://github.com/microsoft/mssql-docker/issues/881
     runs-on: ubuntu-22.04
 
     steps:
