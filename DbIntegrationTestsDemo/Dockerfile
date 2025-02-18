@@ -2,12 +2,11 @@
 
 # generated based on the solution file
 WORKDIR /root
+# clarify paths
 COPY . ./ProjectReference
 COPY . ./DbIntegrationTestsDemo
 
-RUN ls -R
 WORKDIR ./DbIntegrationTestsDemo/DbIntegrationTestsDemo
-RUN ls -R
 RUN dotnet restore
 
 # run tests on docker run
