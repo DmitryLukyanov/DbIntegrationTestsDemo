@@ -12,6 +12,13 @@ namespace DbIntegrationTestsDemo
         }
 
         [Fact]
+        public void Ensure_project_reference_exception_is_expected()
+        {
+            var ex = Record.Exception(() => new ProjectReference.ProjectReferenceWrapper().Throw());
+            Assert.IsType<InvalidOperationException>(ex);
+        }
+
+        [Fact]
         public async Task Ensure_database_have_4_default_databases()
         {
             var allDefaultDatabases = await ReadDatabase("SELECT * FROM sys.databases");

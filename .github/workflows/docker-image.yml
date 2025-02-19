@@ -1,4 +1,4 @@
-name: Integration tests
+name: Integration tests!
 
 on:
   push:
@@ -9,7 +9,8 @@ on:
 jobs:
 
   Containerized_integration_tests:
-    runs-on: ubuntu-latest
+    # latest ubuntu has issues with docker compose: https://github.com/microsoft/mssql-docker/issues/881
+    runs-on: ubuntu-22.04
 
     steps:
     - uses: actions/checkout@v4
@@ -28,9 +29,14 @@ jobs:
       working-directory: Prepare
       run: docker build -t sql-server:2017 . 
 
+    - name: Build WebApp image
+      working-directory: WebAppShowcase
+      run: docker build -t webapp-showcase . 
+
     - name: Build the Integration Tests image
-      working-directory: DbIntegrationTestsDemo
-      run: docker build -t integration-tests .
+      # TODO: choose a better paths
+      working-directory: Prepare
+      run: docker build -t integration-tests -f ./../DbIntegrationTestsDemo/Dockerfile ./../
 
     - name: Containerized tests
       run: docker compose -f docker-compose.yml  up --exit-code-from integration-tests
