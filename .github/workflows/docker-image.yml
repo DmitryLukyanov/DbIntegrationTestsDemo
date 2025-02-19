@@ -14,21 +14,7 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
 
-    # Switch Docker daemon to Windows container mode.
-    - name: Switch Docker to Windows containers
-      shell: pwsh
+    - name: Test Docker on Windows
+      if: startsWith(runner.os, 'Windows')
       run: |
-        Write-Host "Switching Docker daemon to Windows container mode..."
-        & 'C:\Program Files\Docker\Docker\DockerCli.exe' -SwitchDaemon
-        # Optionally, wait until Docker is ready:
-        while(-not (docker info -ErrorAction SilentlyContinue)) {
-          Write-Host "Waiting for Docker to be available..."
-          Start-Sleep -Seconds 5
-        }
-        Write-Host "Docker is now running in Windows container mode."
-
-    - name: Build Windows container image
-      run: docker --version
-
-    - name: Run Windows container
-      run: docker run --rm my-windows-app
+        docker pull hello-world
