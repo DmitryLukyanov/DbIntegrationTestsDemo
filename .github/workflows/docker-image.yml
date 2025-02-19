@@ -7,40 +7,28 @@ on:
     branches: [ "master" ]
 
 jobs:
-
-  Containerized_integration_tests:
-    # latest ubuntu has issues with docker compose: https://github.com/microsoft/mssql-docker/issues/881
-    runs-on: ubuntu-22.04
+  build:
+    runs-on: windows-latest
 
     steps:
-    - uses: actions/checkout@v4
-  
-    - name: Install Latest Docker
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    # Switch Docker daemon to Windows container mode.
+    - name: Switch Docker to Windows containers
+      shell: pwsh
       run: |
-        curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-        sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu  $(lsb_release -cs)  stable"
-        sudo apt-get update
-        sudo apt-get install docker-ce
-        sudo apt-get install docker-compose-plugin
-        sudo apt-get update
-        sudo docker compose version
+        Write-Host "Switching Docker daemon to Windows container mode..."
+        & 'C:\Program Files\Docker\Docker\DockerCli.exe' -SwitchDaemon
+        # Optionally, wait until Docker is ready:
+        while(-not (docker info -ErrorAction SilentlyContinue)) {
+          Write-Host "Waiting for Docker to be available..."
+          Start-Sleep -Seconds 5
+        }
+        Write-Host "Docker is now running in Windows container mode."
 
-    - name: Build the SQL image
-      working-directory: Prepare
-      run: docker build -t sql-server:2017 . 
+    - name: Build Windows container image
+      run: docker --version
 
-    - name: Build WebApp image
-      working-directory: WebAppShowcase
-      run: docker build -t webapp-showcase . 
-
-    - name: Build the Integration Tests image
-      # TODO: choose a better paths
-      working-directory: Prepare
-      run: docker build -t integration-tests -f ./../DbIntegrationTestsDemo/Dockerfile ./../
-
-    - name: Containerized tests
-      run: docker compose -f docker-compose.yml  up --exit-code-from integration-tests
-
-    - name: Tear down services
-      if: always()  # ensures this runs even if previous steps fail
-      run: docker compose down
+    - name: Run Windows container
+      run: docker run --rm my-windows-app
