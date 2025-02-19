@@ -18,3 +18,4 @@ jobs:
       if: startsWith(runner.os, 'Windows')
       run: |
         docker pull hello-world
+        docker --version
