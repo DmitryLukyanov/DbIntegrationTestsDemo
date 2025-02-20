@@ -23,7 +23,7 @@ jobs:
       if: startsWith(runner.os, 'Windows')
       working-directory: PrepareForWindows
       run: |
-        docker run -d -p 1433:1433 -v C:/temp/:C:/temp/ -e sa_password=SQLServer2017 -e ACCEPT_EULA=Y -e attach_dbs="[]" -it mssql-server-windows
+        docker run --name sql-container -d -p 1433:1433 -v C:/temp/:C:/temp/ -e sa_password=SQLServer2017 -e ACCEPT_EULA=Y -e attach_dbs="[]" -it mssql-server-windows
 
     # - name: Test Docker on Windows2
     #   if: startsWith(runner.os, 'Windows')
@@ -35,4 +35,4 @@ jobs:
       if: startsWith(runner.os, 'Windows')
       working-directory: PrepareForWindows
       run: |
-        docker exec -it mssql-server-windows powershel
+        docker exec -it sql-container powershel
