@@ -21,7 +21,9 @@ jobs:
 
     - name: Prepare WebAppLegacy image
       working-directory: WebAppLegacyShowcase
-      run: docker build -t webapp-legacy . 
+      run: |
+        ls
+        docker build -t webapp-legacy . 
 
 
     # - name: Test Docker on Windows
