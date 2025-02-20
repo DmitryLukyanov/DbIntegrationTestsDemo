@@ -20,10 +20,10 @@ jobs:
         .\build_mssql-server-windows.ps1
 
     - name: Prepare WebAppLegacy image
-      working-directory: WebAppLegacyShowcase
+      working-directory: .
       run: |
         ls
-        docker build -t webapp-legacy . 
+        docker build -t webapp-legacy -f WebAppLegacyShowcase/Dockerfile . 
 
 
     # - name: Test Docker on Windows
