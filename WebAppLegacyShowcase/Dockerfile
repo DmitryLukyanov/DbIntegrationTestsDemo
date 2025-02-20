@@ -1,6 +1,7 @@
 FROM mcr.microsoft.com/dotnet/framework/sdk:4.8-windowsservercore-ltsc2019 AS build
-
+RUN echo $(ls -R)
 COPY . ./src/
+RUN echo $(ls -R)
 WORKDIR /src
 
 RUN nuget restore DbIntegrationTestsDemoLegacy.sln
@@ -11,4 +12,4 @@ FROM mcr.microsoft.com/dotnet/framework/aspnet:4.8-windowsservercore-ltsc2019 AS
 WORKDIR /inetpub/wwwroot
 COPY --from=build src/src/PUBLISH/_PublishedWebsites/DbIntegrationTestsDemoLegacy/ ./
 
-RUN echo $(ls)
+RUN echo $(ls -R)
