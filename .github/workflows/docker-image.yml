@@ -35,4 +35,4 @@ jobs:
       if: startsWith(runner.os, 'Windows')
       working-directory: PrepareForWindows
       run: |
-        docker container logs mssql-server-windows
+        docker container logs sql-container
