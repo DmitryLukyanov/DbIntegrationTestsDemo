@@ -32,6 +32,22 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectReference", "Project
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAppLegacyShowcase", "WebAppLegacyShowcase\WebAppLegacyShowcase.csproj", "{873707A7-6585-4B45-90BE-D66038E62C81}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PrepareForWindows", "PrepareForWindows", "{78FBF9C4-B3F3-478F-9278-BD5DC425C67C}"
+	ProjectSection(SolutionItems) = preProject
+		PrepareForWindows\build_mssql-server-windows.ps1 = PrepareForWindows\build_mssql-server-windows.ps1
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "mssql-server-windows", "mssql-server-windows", "{1D95247D-D780-459A-BCC9-F30007B56AAB}"
+	ProjectSection(SolutionItems) = preProject
+		PrepareForWindows\mssql-server-windows\Dockerfile = PrepareForWindows\mssql-server-windows\Dockerfile
+		PrepareForWindows\mssql-server-windows\prepare_sql_for_windows.ps1 = PrepareForWindows\mssql-server-windows\prepare_sql_for_windows.ps1
+		PrepareForWindows\mssql-server-windows\start.ps1 = PrepareForWindows\mssql-server-windows\start.ps1
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectReferenceLegacy", "ProjectReferenceLegacy\ProjectReferenceLegacy.csproj", "{3A91B9CC-84DE-4667-BE2C-758B99CDE2D7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Legacy flow", "Legacy flow", "{03BE8912-1D9D-43C1-A74B-303A29F0AAF4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -58,8 +74,17 @@ Global
 		{873707A7-6585-4B45-90BE-D66038E62C81}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{873707A7-6585-4B45-90BE-D66038E62C81}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{873707A7-6585-4B45-90BE-D66038E62C81}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A91B9CC-84DE-4667-BE2C-758B99CDE2D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A91B9CC-84DE-4667-BE2C-758B99CDE2D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A91B9CC-84DE-4667-BE2C-758B99CDE2D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A91B9CC-84DE-4667-BE2C-758B99CDE2D7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{873707A7-6585-4B45-90BE-D66038E62C81} = {03BE8912-1D9D-43C1-A74B-303A29F0AAF4}
+		{1D95247D-D780-459A-BCC9-F30007B56AAB} = {78FBF9C4-B3F3-478F-9278-BD5DC425C67C}
+		{3A91B9CC-84DE-4667-BE2C-758B99CDE2D7} = {03BE8912-1D9D-43C1-A74B-303A29F0AAF4}
 	EndGlobalSection
 EndGlobal
