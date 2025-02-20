@@ -3,6 +3,7 @@ RUN echo $(ls)
 COPY . ./src/
 RUN echo $(ls)
 WORKDIR /src
+RUN echo $(ls)
 
 RUN nuget restore DbIntegrationTestsDemoLegacy.sln
 RUN msbuild DbIntegrationTestsDemoLegacy.sln /p:Configuration=Release /p:BuildingProject=true /p:OutDir=..\PUBLISH
