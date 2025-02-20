@@ -1,7 +1,14 @@
-# Depending on the operating system of the host machines(s) that will build or run the containers, the image specified in the FROM statement may need to be changed.
-# For more information, please see https://aka.ms/containercompat
+FROM mcr.microsoft.com/dotnet/framework/sdk:4.8-windowsservercore-ltsc2019 AS build
 
-FROM mcr.microsoft.com/dotnet/framework/aspnet:4.8-windowsservercore-ltsc2019
-ARG source
+COPY . ./src/
+WORKDIR /src
+
+RUN nuget restore eShopLegacyWebForms.sln
+RUN msbuild eShopLegacyWebForms.sln /p:Configuration=Release /p:BuildingProject=true /p:OutDir=..\PUBLISH
+RUN echo $(ls src/PUBLISH/_PublishedWebsites/eShopLegacyWebForms)
+
+FROM mcr.microsoft.com/dotnet/framework/aspnet:4.8-windowsservercore-ltsc2019 AS runtime
 WORKDIR /inetpub/wwwroot
-COPY ${source:-obj/Docker/publish} .
+COPY --from=build src/src/PUBLISH/_PublishedWebsites/eShopLegacyWebForms/ ./
+
+RUN echo $(ls)
