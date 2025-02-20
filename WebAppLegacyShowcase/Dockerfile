@@ -1,7 +1,7 @@
 FROM mcr.microsoft.com/dotnet/framework/sdk:4.8-windowsservercore-ltsc2019 AS build
-RUN echo $(ls -R)
+RUN echo $(ls)
 COPY . ./src/
-RUN echo $(ls -R)
+RUN echo $(ls)
 WORKDIR /src
 
 RUN nuget restore DbIntegrationTestsDemoLegacy.sln
