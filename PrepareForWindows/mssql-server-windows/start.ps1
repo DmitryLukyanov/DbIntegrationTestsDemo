@@ -89,7 +89,8 @@ Write-Verbose "Started SQL Server."
 
 $lastCheck = (Get-Date).AddSeconds(-2) 
 while ($true) 
-{ 
+{
+    Write-Host "Iteration!"
     Get-EventLog -LogName Application -Source "MSSQL*" -After $lastCheck | Select-Object TimeGenerated, EntryType, Message	 
     $lastCheck = Get-Date 
     Start-Sleep -Seconds 2 
