@@ -35,8 +35,6 @@ TestResult.xml
 _ReSharper.*
 
 # Sandcastle artifacts
-Help
-*.shfbproj_*
 
 # Vim artifacts
 *.swp
