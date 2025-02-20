@@ -35,4 +35,4 @@ jobs:
       if: startsWith(runner.os, 'Windows')
       working-directory: PrepareForWindows
       run: |
-        docker exec -it sql-container powershel
+        docker exec -i sql-container
