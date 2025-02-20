@@ -19,27 +19,25 @@ jobs:
       run: |
         .\build_mssql-server-windows.ps1
 
-    - name: Test Docker on Windows
-      if: startsWith(runner.os, 'Windows')
-      working-directory: PrepareForWindows
-      run: |
-        docker run --name sql-container -d -p 1433:1433 -v C:/temp/:C:/temp/ -e sa_password=SQLServer2017 -e ACCEPT_EULA=Y -e attach_dbs="[]"  mssql-server-windows
-        docker ps -a
-        docker ps -a
-        docker ps -a
-        docker ps -a
-        docker ps -a
-        docker ps -a
-        docker ps -a
+    - name: Prepare WebAppLegacy image
+      working-directory: \WebApplication_Legacy
+      run: docker build -t webapp-legacy . 
 
-    - name: Test Docker on Windows2
-      if: startsWith(runner.os, 'Windows')
-      working-directory: PrepareForWindows
-      run: |
-        docker container logs sql-container
 
-    - name: Test Docker on Windows3
-      if: startsWith(runner.os, 'Windows')
-      working-directory: PrepareForWindows
-      run: |
-        docker container logs sql-container
+    # - name: Test Docker on Windows
+    #   if: startsWith(runner.os, 'Windows')
+    #   working-directory: PrepareForWindows
+    #   run: |
+    #     docker run --name sql-container -d -p 1433:1433 -v C:/temp/:C:/temp/ -e sa_password=SQLServer2017 -e ACCEPT_EULA=Y -e attach_dbs="[]"  mssql-server-windows
+
+    # - name: Test Docker on Windows2
+    #   if: startsWith(runner.os, 'Windows')
+    #   working-directory: PrepareForWindows
+    #   run: |
+    #     docker container logs sql-container
+
+    # - name: Test Docker on Windows3
+    #   if: startsWith(runner.os, 'Windows')
+    #   working-directory: PrepareForWindows
+    #   run: |
+    #     docker container logs sql-container
