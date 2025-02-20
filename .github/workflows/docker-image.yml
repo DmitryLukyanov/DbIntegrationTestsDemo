@@ -16,6 +16,6 @@ jobs:
 
     - name: Test Docker on Windows
       if: startsWith(runner.os, 'Windows')
-      working-directory: PrepareForWindows
+      working-directory: mssql-server-windows
       run: |
         docker run -d -p 1433:1433 -v C:/temp/:C:/temp/ -e sa_password=SQLServer2017 -e ACCEPT_EULA=Y -e attach_dbs="[]" microsoft/mssql-server-windows
