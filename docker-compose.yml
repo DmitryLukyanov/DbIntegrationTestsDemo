@@ -36,15 +36,15 @@ services:
     env_file:
       - 'variables.env'
 
-  integration-tests:
-    image: integration-tests
-    networks:
-      - services-network
-    depends_on:
-      webapp-showcase:
-        condition: service_healthy
-    env_file:
-      - 'variables.env'
+  # integration-tests:
+  #   image: integration-tests
+  #   networks:
+  #     - services-network
+  #   depends_on:
+  #     webapp-showcase:
+  #       condition: service_healthy
+  #   env_file:
+  #     - 'variables.env'
 
 networks:
   services-network: 
