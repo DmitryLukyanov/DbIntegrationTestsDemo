@@ -12,6 +12,6 @@ RUN echo $(ls ./PUBLISH/_PublishedWebsites/WebAppLegacyShowcase)
 
 FROM mcr.microsoft.com/dotnet/framework/aspnet:4.8-windowsservercore-ltsc2019 AS runtime
 WORKDIR /inetpub/wwwroot
-COPY --from=build src/src/PUBLISH/_PublishedWebsites/WebAppLegacyShowcase/ ./
+COPY --from=build src/PUBLISH/_PublishedWebsites/WebAppLegacyShowcase/ ./
 
 RUN echo $(ls -R)
