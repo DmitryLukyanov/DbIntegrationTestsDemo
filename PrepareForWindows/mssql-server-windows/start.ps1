@@ -95,7 +95,9 @@ while ($true)
     $sqlcmd = "SELECT 1 as v;"
 
     Write-Output "Invoke-Sqlcmd -Query $($sqlcmd)"
-    & sqlcmd -Q $sqlcmd
+    & sqlcmd -Q $sqlcmd 
+
+    sqlcmd -S localhost,1433 -U sa -P _ -Q \"SELECT 1\"
 
     Get-EventLog -LogName Application -Source "MSSQL*" -After $lastCheck | Select-Object TimeGenerated, EntryType, Message	 
     $lastCheck = Get-Date 
