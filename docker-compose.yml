@@ -11,12 +11,12 @@ services:
       - services-network
     env_file:
       - 'variables.env'
-    # healthcheck:
-    #   # TODO: use env variables instead hardcoded values
-    #   test: ["CMD-SHELL", "sqlcmd -S localhost,1433 -U sa -P SQLServer2017 -Q \"SELECT 1\" || exit 1"]
-    #   interval: 10s
-    #   timeout: 5s
-    #   retries: 5
+    healthcheck:
+      # TODO: use env variables instead hardcoded values
+      test: ["CMD-SHELL", "sqlcmd -S localhost,1433 -U sa -P _ -Q \"SELECT 1\" || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
     # to allow post_start, docker compose must be higher than 2.3
     #post_start:
     #  - command: sqlcmd -S "localhost" -U "sa" -P "SQLServer2017" -i /usr/share/instnwnd.sql
