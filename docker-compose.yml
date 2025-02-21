@@ -1,6 +1,6 @@
 services:
   sql-server:
-    image: sql-server:2017
+    image: mssql-server-windows
     environment:
       ACCEPT_EULA: "Y"
       MSSQL_SA_PASSWORD: "SQLServer2017"
@@ -13,38 +13,38 @@ services:
       - 'variables.env'
     healthcheck:
       # TODO: use env variables instead hardcoded values
-      test: ["CMD-SHELL", "sqlcmd -S localhost,1433 -U sa -P SQLServer2017 -Q \"SELECT 1\" || exit 1"]
+      test: ["CMD-SHELL", "sqlcmd -S localhost,1433 -U sa -P _ -Q \"SELECT 1\" || exit 1"]
       interval: 10s
       timeout: 5s
       retries: 5
     # to allow post_start, docker compose must be higher than 2.3
-    post_start:
-      - command: sqlcmd -S "localhost" -U "sa" -P "SQLServer2017" -i /usr/share/instnwnd.sql
+    #post_start:
+    #  - command: sqlcmd -S "localhost" -U "sa" -P "SQLServer2017" -i /usr/share/instnwnd.sql
 
-  webapp-showcase:
-    image: webapp-showcase
+  webapp-legacy:
+    image: webapp-legacy
     networks:
       - services-network
-    healthcheck:
-      test: ["CMD-SHELL", "curl --fail http://localhost:8080/WeatherForecast || exit 1"]
-      interval: 10s
-      timeout: 5s
-      retries: 3 
+    # healthcheck:
+    #   test: ["CMD-SHELL", "curl --fail http://localhost:8080/WeatherForecast || exit 1"]
+    #   interval: 10s
+    #   timeout: 5s
+    #   retries: 3 
     depends_on:
       sql-server:
         condition: service_healthy
     env_file:
       - 'variables.env'
 
-  integration-tests:
-    image: integration-tests
-    networks:
-      - services-network
-    depends_on:
-      webapp-showcase:
-        condition: service_healthy
-    env_file:
-      - 'variables.env'
+  # integration-tests:
+  #   image: integration-tests
+  #   networks:
+  #     - services-network
+  #   depends_on:
+  #     webapp-showcase:
+  #       condition: service_healthy
+  #   env_file:
+  #     - 'variables.env'
 
 networks:
   services-network: 
